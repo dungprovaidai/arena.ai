@@ -6,6 +6,7 @@ import com.pathways.beyond.registry.ModAttachments;
 import com.pathways.beyond.sanity.HallucinationDirector;
 import com.pathways.beyond.sanity.OccultState;
 import com.pathways.beyond.sanity.SanitySystem;
+import com.pathways.beyond.spirit.SpiritWorld;
 import com.pathways.beyond.soul.SoulThreadManager;
 
 import net.minecraft.server.level.ServerLevel;

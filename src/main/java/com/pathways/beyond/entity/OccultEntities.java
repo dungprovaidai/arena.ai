@@ -764,6 +764,7 @@ public final class OccultEntities {
     // ===================================================================================
     public static class HistoricalEchoEntity extends UncannyEntity {
         private EntityType<?> echoType;
+        private java.util.UUID echoOwner;
         private boolean aggressive;
 
         public HistoricalEchoEntity(EntityType<? extends HistoricalEchoEntity> type, Level level) {
@@ -782,6 +783,14 @@ public final class OccultEntities {
 
         public EntityType<?> echoType() {
             return echoType;
+        }
+
+        public void setOwner(java.util.UUID owner) {
+            this.echoOwner = owner;
+        }
+
+        public java.util.UUID owner() {
+            return echoOwner;
         }
 
         public void setAggressive(boolean aggressive) {

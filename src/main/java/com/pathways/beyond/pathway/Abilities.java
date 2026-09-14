@@ -497,7 +497,7 @@ public final class Abilities {
             var echo = ModEntities.HistoricalEcho.get().create(level);
             if (echo != null) {
                 echo.moveTo(player.getX(), player.getY(), player.getZ(), player.getYRot(), 0.0f);
-                echo.setOwner(player);
+                echo.setOwner(player.getUUID());
                 if (source != null) {
                     echo.setEchoType(source.getType());
                 }

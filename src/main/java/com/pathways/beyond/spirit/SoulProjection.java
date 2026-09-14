@@ -80,7 +80,7 @@ public final class SoulProjection {
         var shell = ModEntities.PlayerBodyShell.get().create(level);
         if (shell != null) {
             shell.moveTo(player.getX(), player.getY(), player.getZ(), player.getYRot(), player.getXRot());
-            shell.setOwner(player.getUUID());
+            shell.setOwner(player);
             shell.setOwnerName(player.getGameProfile().getName());
             level.addFreshEntity(shell);
         }

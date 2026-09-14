@@ -178,8 +178,7 @@ public final class StructurePlacer {
         BlockPos origin = new BlockPos(x - template.getSize().getX() / 2, y, z - template.getSize().getZ() / 2);
         StructurePlaceSettings settings = new StructurePlaceSettings()
                 .setIgnoreEntities(false)
-                .setFinalizeEntities(true)
-                .setKeepLiquid(false);
+                .setFinalizeEntities(true);
         template.placeInWorld(level, origin, origin, settings, random, Block.UPDATE_ALL);
         clearAbove(level, origin, template.getSize().getX(), template.getSize().getZ(),
                 Math.max(4, template.getSize().getY() / 3));

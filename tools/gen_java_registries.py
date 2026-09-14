@@ -417,7 +417,10 @@ def gen_items():
         cls = ITEM_CLASSES[uid]
         out.append(f'    /** {name} - {desc} */')
         out.append(f'    public static final DeferredItem<Item> {const} = ITEMS.register("{uid}",')
-        out.append(f'            () -> new OccultItems.{cls}(new Item.Properties().stacksTo(1)));')
+        if cls == "SimpleLoreItem":
+            out.append(f'            () -> new OccultItems.SimpleLoreItem(new Item.Properties().stacksTo(1), 3));')
+        else:
+            out.append(f'            () -> new OccultItems.{cls}(new Item.Properties().stacksTo(1)));')
     out.append("")
     out.append("    // ---- drops ----")
     out.append('    public static final DeferredItem<Item> CORRUPTED_HEART_DROP = ITEMS.register("corrupted_heart",')

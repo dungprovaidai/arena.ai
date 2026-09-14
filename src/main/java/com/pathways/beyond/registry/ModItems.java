@@ -142,7 +142,7 @@ public final class ModItems {
             () -> new OccultItems.CodexItem(new Item.Properties().stacksTo(1)));
     /** Spool of Soul Thread - Crafting component; the raw material of binding. */
     public static final DeferredItem<Item> SoulThreadSpool = ITEMS.register("soul_thread_spool",
-            () -> new OccultItems.SimpleLoreItem(new Item.Properties().stacksTo(1)));
+            () -> new OccultItems.SimpleLoreItem(new Item.Properties().stacksTo(1), 3));
     /** Thread Shears - Cut a bound Soul Thread. The puppet remembers being cut. */
     public static final DeferredItem<Item> ThreadShears = ITEMS.register("thread_shears",
             () -> new OccultItems.ThreadShearsItem(new Item.Properties().stacksTo(1)));

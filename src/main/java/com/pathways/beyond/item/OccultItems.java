@@ -408,11 +408,11 @@ public final class OccultItems {
                     return InteractionResultHolder.fail(stack);
                 }
                 stack.set(ModComponents.BLOOD_CHARGES.get(), charges + 1);
-                if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
-                    serverPlayer.hurt(player.damageSources().magic(), 1.5f);
-                    serverPlayer.playSound(null, player.blockPosition(), ModSounds.DaggerCut.get(),
+                if (player instanceof net.minecraft.server.level.ServerPlayer bloodOwner) {
+                    bloodOwner.hurt(player.damageSources().magic(), 1.5f);
+                    bloodOwner.level().playSound(null, player.blockPosition(), ModSounds.DaggerCut.get(),
                             SoundSource.PLAYERS, 1.0f, 1.0f);
-                    serverPlayer.sendParticles(ModParticles.BloodDrop.get(), player.getX(),
+                    bloodOwner.serverLevel().sendParticles(ModParticles.BloodDrop.get(), player.getX(),
                             player.getY() + 1.2, player.getZ(), 8, 0.2, 0.2, 0.2, 0.03);
                 }
             }
