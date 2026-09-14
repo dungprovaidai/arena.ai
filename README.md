@@ -11,6 +11,13 @@ circle. Every rung upward costs Sanity and buys Corruption.
 
 ---
 
+## Download
+
+Grab the built mod from the [releases page](https://github.com/dungprovaidai/arena.ai/releases):
+`pathwaysofthebeyond-1.0.0+mc1.21.1.jar`, built by GitHub Actions
+(`.github/workflows/build-release.yml`) on tag `v*`, so the attached jar always matches a tagged
+commit. Drop it into `mods/` beside NeoForge for Minecraft 1.21.1 — nothing else to install.
+
 ## Requirements
 
 | | |
