@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "pathwaysofthebeyond:block/dark_plank_slab"
+    },
+    "type=top": {
+      "model": "pathwaysofthebeyond:block/dark_plank_slab_top"
+    },
+    "type=double": {
+      "model": "pathwaysofthebeyond:block/dark_plank_slab_double"
+    }
+  }
+}

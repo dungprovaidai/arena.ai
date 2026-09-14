@@ -1,0 +1,506 @@
+{
+  "potion_drink": {
+    "subtitle": "sound.pathwaysofthebeyond.potion_drink",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:potion_drink",
+        "stream": false
+      }
+    ]
+  },
+  "potion_brew": {
+    "subtitle": "sound.pathwaysofthebeyond.potion_brew",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:potion_brew",
+        "stream": false
+      }
+    ]
+  },
+  "potion_finish": {
+    "subtitle": "sound.pathwaysofthebeyond.potion_finish",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:potion_finish",
+        "stream": false
+      }
+    ]
+  },
+  "codex_open": {
+    "subtitle": "sound.pathwaysofthebeyond.codex_open",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:codex_open",
+        "stream": false
+      }
+    ]
+  },
+  "codex_page": {
+    "subtitle": "sound.pathwaysofthebeyond.codex_page",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:codex_page",
+        "stream": false
+      }
+    ]
+  },
+  "bell_ring": {
+    "subtitle": "sound.pathwaysofthebeyond.bell_ring",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:bell_ring",
+        "stream": false
+      }
+    ]
+  },
+  "bell_answer": {
+    "subtitle": "sound.pathwaysofthebeyond.bell_answer",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:bell_answer",
+        "stream": false
+      }
+    ]
+  },
+  "artifact_activate": {
+    "subtitle": "sound.pathwaysofthebeyond.artifact_activate",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:artifact_activate",
+        "stream": false
+      }
+    ]
+  },
+  "artifact_curse": {
+    "subtitle": "sound.pathwaysofthebeyond.artifact_curse",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:artifact_curse",
+        "stream": false
+      }
+    ]
+  },
+  "thread_bind": {
+    "subtitle": "sound.pathwaysofthebeyond.thread_bind",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:thread_bind",
+        "stream": false
+      }
+    ]
+  },
+  "thread_sever": {
+    "subtitle": "sound.pathwaysofthebeyond.thread_sever",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:thread_sever",
+        "stream": false
+      }
+    ]
+  },
+  "thread_tension": {
+    "subtitle": "sound.pathwaysofthebeyond.thread_tension",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:thread_tension",
+        "stream": false
+      }
+    ]
+  },
+  "chalk_draw": {
+    "subtitle": "sound.pathwaysofthebeyond.chalk_draw",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:chalk_draw",
+        "stream": false
+      }
+    ]
+  },
+  "dagger_cut": {
+    "subtitle": "sound.pathwaysofthebeyond.dagger_cut",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:dagger_cut",
+        "stream": false
+      }
+    ]
+  },
+  "ritual_start": {
+    "subtitle": "sound.pathwaysofthebeyond.ritual_start",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:ritual_start",
+        "stream": false
+      }
+    ]
+  },
+  "ritual_loop": {
+    "subtitle": "sound.pathwaysofthebeyond.ritual_loop",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:ritual_loop",
+        "stream": false
+      }
+    ]
+  },
+  "ritual_pulse": {
+    "subtitle": "sound.pathwaysofthebeyond.ritual_pulse",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:ritual_pulse",
+        "stream": false
+      }
+    ]
+  },
+  "ritual_chant": {
+    "subtitle": "sound.pathwaysofthebeyond.ritual_chant",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:ritual_chant",
+        "stream": false
+      }
+    ]
+  },
+  "ritual_complete": {
+    "subtitle": "sound.pathwaysofthebeyond.ritual_complete",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:ritual_complete",
+        "stream": false
+      }
+    ]
+  },
+  "ritual_fail": {
+    "subtitle": "sound.pathwaysofthebeyond.ritual_fail",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:ritual_fail",
+        "stream": false
+      }
+    ]
+  },
+  "whisper_near": {
+    "subtitle": "sound.pathwaysofthebeyond.whisper_near",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:whisper_near",
+        "stream": false
+      }
+    ]
+  },
+  "whisper_far": {
+    "subtitle": "sound.pathwaysofthebeyond.whisper_far",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:whisper_far",
+        "stream": false
+      }
+    ]
+  },
+  "heartbeat": {
+    "subtitle": "sound.pathwaysofthebeyond.heartbeat",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:heartbeat",
+        "stream": false
+      }
+    ]
+  },
+  "breathing": {
+    "subtitle": "sound.pathwaysofthebeyond.breathing",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:breathing",
+        "stream": false
+      }
+    ]
+  },
+  "knock": {
+    "subtitle": "sound.pathwaysofthebeyond.knock",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:knock",
+        "stream": false
+      }
+    ]
+  },
+  "rumble": {
+    "subtitle": "sound.pathwaysofthebeyond.rumble",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:rumble",
+        "stream": false
+      }
+    ]
+  },
+  "static": {
+    "subtitle": "sound.pathwaysofthebeyond.static",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:static",
+        "stream": false
+      }
+    ]
+  },
+  "watcher_stare": {
+    "subtitle": "sound.pathwaysofthebeyond.watcher_stare",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:watcher_stare",
+        "stream": false
+      }
+    ]
+  },
+  "watcher_vanish": {
+    "subtitle": "sound.pathwaysofthebeyond.watcher_vanish",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:watcher_vanish",
+        "stream": false
+      }
+    ]
+  },
+  "hollow_step": {
+    "subtitle": "sound.pathwaysofthebeyond.hollow_step",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:hollow_step",
+        "stream": false
+      }
+    ]
+  },
+  "hollow_idle": {
+    "subtitle": "sound.pathwaysofthebeyond.hollow_idle",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:hollow_idle",
+        "stream": false
+      }
+    ]
+  },
+  "husk_whisper": {
+    "subtitle": "sound.pathwaysofthebeyond.husk_whisper",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:husk_whisper",
+        "stream": false
+      }
+    ]
+  },
+  "husk_attack": {
+    "subtitle": "sound.pathwaysofthebeyond.husk_attack",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:husk_attack",
+        "stream": false
+      }
+    ]
+  },
+  "marionette_joint": {
+    "subtitle": "sound.pathwaysofthebeyond.marionette_joint",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:marionette_joint",
+        "stream": false
+      }
+    ]
+  },
+  "choirmaster_chant": {
+    "subtitle": "sound.pathwaysofthebeyond.choirmaster_chant",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:choirmaster_chant",
+        "stream": false
+      }
+    ]
+  },
+  "choirmaster_scream": {
+    "subtitle": "sound.pathwaysofthebeyond.choirmaster_scream",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:choirmaster_scream",
+        "stream": false
+      }
+    ]
+  },
+  "unblinking_gaze": {
+    "subtitle": "sound.pathwaysofthebeyond.unblinking_gaze",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:unblinking_gaze",
+        "stream": false
+      }
+    ]
+  },
+  "unblinking_hurt": {
+    "subtitle": "sound.pathwaysofthebeyond.unblinking_hurt",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:unblinking_hurt",
+        "stream": false
+      }
+    ]
+  },
+  "unblinking_death": {
+    "subtitle": "sound.pathwaysofthebeyond.unblinking_death",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:unblinking_death",
+        "stream": false
+      }
+    ]
+  },
+  "tenant_possess": {
+    "subtitle": "sound.pathwaysofthebeyond.tenant_possess",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:tenant_possess",
+        "stream": false
+      }
+    ]
+  },
+  "sequence_advance": {
+    "subtitle": "sound.pathwaysofthebeyond.sequence_advance",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:sequence_advance",
+        "stream": false
+      }
+    ]
+  },
+  "sequence_digest": {
+    "subtitle": "sound.pathwaysofthebeyond.sequence_digest",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:sequence_digest",
+        "stream": false
+      }
+    ]
+  },
+  "corruption_pulse": {
+    "subtitle": "sound.pathwaysofthebeyond.corruption_pulse",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:corruption_pulse",
+        "stream": false
+      }
+    ]
+  },
+  "spirit_enter": {
+    "subtitle": "sound.pathwaysofthebeyond.spirit_enter",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:spirit_enter",
+        "stream": false
+      }
+    ]
+  },
+  "spirit_exit": {
+    "subtitle": "sound.pathwaysofthebeyond.spirit_exit",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:spirit_exit",
+        "stream": false
+      }
+    ]
+  },
+  "spirit_ambient": {
+    "subtitle": "sound.pathwaysofthebeyond.spirit_ambient",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:spirit_ambient",
+        "stream": false
+      }
+    ]
+  },
+  "spirit_strain": {
+    "subtitle": "sound.pathwaysofthebeyond.spirit_strain",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:spirit_strain",
+        "stream": false
+      }
+    ]
+  },
+  "spirit_snap": {
+    "subtitle": "sound.pathwaysofthebeyond.spirit_snap",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:spirit_snap",
+        "stream": false
+      }
+    ]
+  },
+  "red_moon": {
+    "subtitle": "sound.pathwaysofthebeyond.red_moon",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:red_moon",
+        "stream": false
+      }
+    ]
+  },
+  "veil_thins": {
+    "subtitle": "sound.pathwaysofthebeyond.veil_thins",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:veil_thins",
+        "stream": false
+      }
+    ]
+  },
+  "whispering_night": {
+    "subtitle": "sound.pathwaysofthebeyond.whispering_night",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:whispering_night",
+        "stream": false
+      }
+    ]
+  },
+  "memory_echo": {
+    "subtitle": "sound.pathwaysofthebeyond.memory_echo",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:memory_echo",
+        "stream": false
+      }
+    ]
+  },
+  "faceless_shift": {
+    "subtitle": "sound.pathwaysofthebeyond.faceless_shift",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:faceless_shift",
+        "stream": false
+      }
+    ]
+  },
+  "authority_forbid": {
+    "subtitle": "sound.pathwaysofthebeyond.authority_forbid",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:authority_forbid",
+        "stream": false
+      }
+    ]
+  },
+  "beyond_call": {
+    "subtitle": "sound.pathwaysofthebeyond.beyond_call",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:beyond_call",
+        "stream": false
+      }
+    ]
+  },
+  "beyond_arrival": {
+    "subtitle": "sound.pathwaysofthebeyond.beyond_arrival",
+    "sounds": [
+      {
+        "name": "pathwaysofthebeyond:beyond_arrival",
+        "stream": false
+      }
+    ]
+  }
+}

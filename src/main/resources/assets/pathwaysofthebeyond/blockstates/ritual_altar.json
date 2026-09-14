@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=south": {
+      "model": "pathwaysofthebeyond:block/ritual_altar",
+      "y": 0
+    },
+    "facing=west": {
+      "model": "pathwaysofthebeyond:block/ritual_altar",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "pathwaysofthebeyond:block/ritual_altar",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "pathwaysofthebeyond:block/ritual_altar",
+      "y": 270
+    }
+  }
+}

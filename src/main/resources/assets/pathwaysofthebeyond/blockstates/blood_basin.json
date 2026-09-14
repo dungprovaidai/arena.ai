@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "level=0": {
+      "model": "pathwaysofthebeyond:block/blood_basin"
+    },
+    "level=1": {
+      "model": "pathwaysofthebeyond:block/blood_basin"
+    },
+    "level=2": {
+      "model": "pathwaysofthebeyond:block/blood_basin"
+    },
+    "level=3": {
+      "model": "pathwaysofthebeyond:block/blood_basin"
+    }
+  }
+}

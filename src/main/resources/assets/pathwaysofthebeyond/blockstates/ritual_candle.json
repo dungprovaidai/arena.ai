@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "pathwaysofthebeyond:block/ritual_candle"
+    },
+    "lit=true": {
+      "model": "pathwaysofthebeyond:block/ritual_candle_lit"
+    }
+  }
+}

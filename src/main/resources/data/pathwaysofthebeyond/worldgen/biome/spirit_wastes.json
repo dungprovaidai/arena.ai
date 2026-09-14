@@ -1,0 +1,78 @@
+{
+  "temperature": 0.5,
+  "downfall": 0.1,
+  "has_precipitation": false,
+  "temperature_modifier": "none",
+  "creature_spawn_probability": 0.0,
+  "effects": {
+    "sky_color": 5267795,
+    "fog_color": 2764339,
+    "water_color": 4159204,
+    "water_fog_color": 329011,
+    "mood_sound": {
+      "sound": "pathwaysofthebeyond:spirit_ambient",
+      "tick_delay": 600,
+      "block_search_extent": 8,
+      "offset": 2.0
+    },
+    "additions_sound": {
+      "sound": "pathwaysofthebeyond:whisper_far",
+      "tick_chance": 0.006
+    }
+  },
+  "spawners": {
+    "monster": [
+      {
+        "type": "pathwaysofthebeyond:hollow",
+        "weight": 8,
+        "minCount": 1,
+        "maxCount": 2
+      },
+      {
+        "type": "pathwaysofthebeyond:spirit_wisp",
+        "weight": 12,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "pathwaysofthebeyond:veil_tenant",
+        "weight": 4,
+        "minCount": 1,
+        "maxCount": 1
+      }
+    ],
+    "creature": [],
+    "ambient": [],
+    "axolotls": [],
+    "underground_water_creature": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {},
+  "carvers": {
+    "air": [
+      "minecraft:cave",
+      "minecraft:cave_extra_underground",
+      "minecraft:canyon"
+    ]
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "minecraft:amethyst_geode"
+    ],
+    [
+      "minecraft:monster_room",
+      "minecraft:monster_room_deep"
+    ],
+    [],
+    []
+  ]
+}

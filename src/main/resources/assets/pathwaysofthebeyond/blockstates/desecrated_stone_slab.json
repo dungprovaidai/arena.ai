@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "pathwaysofthebeyond:block/desecrated_stone_slab"
+    },
+    "type=top": {
+      "model": "pathwaysofthebeyond:block/desecrated_stone_slab_top"
+    },
+    "type=double": {
+      "model": "pathwaysofthebeyond:block/desecrated_stone_slab_double"
+    }
+  }
+}

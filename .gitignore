@@ -1,0 +1,32 @@
+# Gradle / build output
+.gradle/
+build/
+out/
+run/
+runs/
+*.class
+*.log
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+bin/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local publishing repo
+repo/
+
+# Node tooling used by tools/ (asset verification only)
+node_modules/
+package-lock.json
+
+# Python
+__pycache__/
+.venv/

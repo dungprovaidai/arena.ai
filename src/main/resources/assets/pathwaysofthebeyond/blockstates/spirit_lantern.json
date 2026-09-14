@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "pathwaysofthebeyond:block/spirit_lantern"
+    },
+    "lit=true": {
+      "model": "pathwaysofthebeyond:block/spirit_lantern"
+    }
+  }
+}
