@@ -78,6 +78,12 @@ jobs:
             echo '```text'
             sed -n '/FAILURE: Build failed/,/^\* Try:/p' build.log 2>/dev/null | head -n 60 || true
             echo '```'
+            if [ -f verify.log ]; then
+              echo '#### Jar verification'
+              echo '```text'
+              tail -c 4000 verify.log || true
+              echo '```'
+            fi
             echo '#### Tail of build log'
             echo '```text'
             tail -c 12000 build.log 2>/dev/null || echo 'no build.log'
@@ -93,6 +99,41 @@ jobs:
           echo "path=$JAR" >> "$GITHUB_OUTPUT"
           echo "name=$(basename "$JAR" 2>/dev/null)" >> "$GITHUB_OUTPUT"
           ls -la build/libs || true
+
+      - name: Inspect the built jar
+        if: success()
+        run: |
+          set -euo pipefail
+          JAR="${{ steps.jar.outputs.path }}"
+          test -f "$JAR" || { echo "no jar found"; exit 1; }
+          {
+            echo "jar: $JAR"
+            echo "size: $(stat -c%s "$JAR") bytes"
+            sha256sum "$JAR"
+            echo "entries: $(unzip -l "$JAR" | tail -n 1)"
+            for entry in META-INF/neoforge.mods.toml \
+                         com/pathways/beyond/PathwaysMod.class \
+                         assets/pathwaysofthebeyond/lang/en_us.json \
+                         assets/pathwaysofthebeyond/sounds.json \
+                         assets/pathwaysofthebeyond/textures/item/eye_of_solomon.png \
+                         data/pathwaysofthebeyond/dimension/spirit_world.json \
+                         data/pathwaysofthebeyond/dimension_type/spirit_world.json; do
+              if unzip -l "$JAR" "$entry" >/dev/null 2>&1; then
+                echo "ok: $entry"
+              else
+                echo "MISSING: $entry"
+                exit 1
+              fi
+            done
+            echo "--- entry listing (head) ---"
+            unzip -l "$JAR" | sed -n '4,22p'
+          } 2>&1 | tee verify.log
+          {
+            echo '#### Jar verification'
+            echo '```text'
+            cat verify.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload jar artefact
         if: success()

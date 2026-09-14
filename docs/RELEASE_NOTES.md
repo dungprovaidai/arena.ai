@@ -57,3 +57,11 @@ placeholders.
 * Seven of the eight Pathways have names, lore, colours and Sequence ladders defined; they are
   the next content pass.
 * Command reference and full documentation: see the repository README.
+
+## Build
+
+Built by GitHub Actions (`.github/workflows/build-release.yml`) from the tagged commit, with
+Temurin JDK 21 and the NeoForge ModDevGradle toolchain. The attached jar is the only artefact:
+`pathwaysofthebeyond-1.0.0+mc1.21.1.jar`. Drop it in `mods/` next to
+[NeoForge 21.1.172+](https://neoforged.net/) for Minecraft 1.21.1 — no other dependency, no
+resource pack or config needed.
