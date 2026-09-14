@@ -1,0 +1,90 @@
+name: Build and Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (tag name, e.g. v1.0.0)'
+        required: true
+        default: 'v1.0.0'
+      publish_release:
+        description: 'Create/update a GitHub release with the built jar attached'
+        type: boolean
+        required: true
+        default: true
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build jar
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.10.2'
+          cache-read-only: false
+
+      - name: Build
+        run: |
+          set -o pipefail
+          if [ -x ./gradlew ]; then
+            ./gradlew build --no-daemon --stacktrace 2>&1 | tee build.log
+          else
+            gradle build --no-daemon --stacktrace 2>&1 | tee build.log
+          fi
+
+      - name: Show build output on failure
+        if: failure()
+        run: |
+          echo '::group::Last 200 lines of build.log'
+          tail -n 200 build.log || true
+          echo '::endgroup::'
+          echo '::group::Compile errors'
+          grep -E "error:|\.java:[0-9]+: error" build.log | head -n 80 || true
+          echo '::endgroup::'
+
+      - name: Resolve artefact name
+        id: jar
+        run: |
+          JAR=$(ls build/libs/*.jar 2>/dev/null | grep -v sources | head -n 1 || true)
+          echo "path=$JAR" >> "$GITHUB_OUTPUT"
+          echo "name=$(basename "$JAR" 2>/dev/null)" >> "$GITHUB_OUTPUT"
+          ls -la build/libs || true
+
+      - name: Upload jar artefact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pathways-of-the-beyond-jar
+          path: build/libs/*.jar
+          if-no-files-found: error
+
+      - name: Create release and attach jar
+        if: success() && (startsWith(github.ref, 'refs/tags/v') || inputs.publish_release)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${{ inputs.version }}"
+          if [ -z "$TAG" ]; then TAG="${GITHUB_REF_NAME}"; fi
+          JAR="${{ steps.jar.outputs.path }}"
+          test -n "$JAR" || { echo "no jar built"; exit 1; }
+          gh release view "$TAG" >/dev/null 2>&1 || \
+            gh release create "$TAG" --title "Pathways of the Beyond ${TAG#v}" \
+              --notes-file docs/RELEASE_NOTES.md --target "$GITHUB_SHA"
+          gh release upload "$TAG" "$JAR" --clobber
+          gh release view "$TAG" --json assets -q '.assets[].name'
