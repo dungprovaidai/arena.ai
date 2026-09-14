@@ -437,11 +437,6 @@ public class ChoirmasterEntity extends Monster {
         return false;
     }
 
-    @Override
-    public boolean canChangeDimensions() {
-        return false;   // the boss is bound to its arena
-    }
-
     /** Conducts: manages the telegraphed strike and keeps facing the target. */
     static class ConductGoal extends Goal {
         private final ChoirmasterEntity boss;

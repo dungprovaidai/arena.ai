@@ -82,7 +82,7 @@ public final class PathwaysCommand {
                                     ModNetwork.sendOccultSync(player);
                                     ctx.getSource().sendSuccess(() -> Component.literal(
                                             "Corruption = " + value + " ("
-                                                    + SanitySystem.stageFor(value).id() + ")"), false);
+                                                    + SanitySystem.stage(value).id() + ")"), false);
                                     return 1;
                                 })))
                 .then(Commands.literal("sequence")
@@ -104,7 +104,7 @@ public final class PathwaysCommand {
                             ServerPlayer player = ctx.getSource().getPlayerOrException();
                             PlayerPathway pathway = ModAttachments.pathway(player);
                             pathway.addDigestion(100.0f);
-                            SequenceLogic.advance(player, false);
+                            SequenceLogic.advance(player, Math.max(0, pathway.sequence() - 1), false);
                             ModNetwork.sendPathwaySync(player);
                             ctx.getSource().sendSuccess(() -> Component.literal(
                                     "Attempted advancement to Sequence " + pathway.sequence()), false);
@@ -150,9 +150,9 @@ public final class PathwaysCommand {
                                         return 0;
                                     }
                                     ctx.getSource().sendSuccess(() -> Component.literal(
-                                            "Site: chalk " + site.chalkBlocks().size()
-                                                    + ", candles " + site.litCandles().size()
-                                                    + ", basins " + site.basins().size()), false);
+                                            "Site: chalk " + site.chalkBlocks()
+                                                    + ", candles " + site.litCandles()
+                                                    + ", basins " + site.basins()), false);
                                     return 1;
                                 })))
                 // ---- world events -------------------------------------------------------
@@ -165,9 +165,9 @@ public final class PathwaysCommand {
                                 .executes(ctx -> {
                                     ServerPlayer player = ctx.getSource().getPlayerOrException();
                                     String id = StringArgumentType.getString(ctx, "id");
-                                    for (WorldEventManager.Event event : WorldEventManager.Event.values()) {
-                                        if (event.id.equals(id)) {
-                                            if (event == WorldEventManager.Event.THE_NOTICING) {
+                                    for (WorldEventManager.Event candidate : WorldEventManager.Event.values()) {
+                                        if (candidate.id.equals(id)) {
+                                            if (candidate == WorldEventManager.Event.THE_NOTICING) {
                                                 WorldEventManager.beginTheNoticing(player.serverLevel(), player);
                                             } else {
                                                 WorldEventManager.start(player.serverLevel(), event);
@@ -261,9 +261,9 @@ public final class PathwaysCommand {
                 + "  sequence: " + pathway.sequence()
                 + "  digestion: " + String.format("%.1f", pathway.digestion()) + "%"), false);
         source.sendSuccess(() -> Component.literal("sanity: " + String.format("%.1f", state.sanity())
-                + " (" + SanitySystem.tierFor(state.sanity()).id() + ")"
+                + " (" + SanitySystem.tier(state.sanity()).id() + ")"
                 + "  corruption: " + String.format("%.1f", state.corruption())
-                + " (" + SanitySystem.stageFor(state.corruption()).id() + ")"), false);
+                + " (" + SanitySystem.stage(state.corruption()).id() + ")"), false);
         source.sendSuccess(() -> Component.literal("rituals known: " + pathway.knownRituals().size()
                 + "  threads bound: " + com.pathways.beyond.soul.SoulThreadManager.boundCount(player)
                 + "  spirit form: " + state.spiritForm()

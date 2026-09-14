@@ -85,6 +85,8 @@ neoForge.ideSyncTask generateModMetadata
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
     options.release = 21
+    // report every compile error in one run instead of stopping after 100
+    options.compilerArgs += ['-Xmaxerrs', '500']
 }
 
 publishing {

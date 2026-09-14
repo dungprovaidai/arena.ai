@@ -120,8 +120,8 @@ public final class ModNetwork {
         tag.putString(OccultMessages.F_PATHWAY, data.pathwayId());
         tag.putInt(OccultMessages.F_SEQUENCE, data.sequence());
         tag.putFloat(OccultMessages.F_DIGESTION, data.digestion());
-        tag.put(OccultMessages.F_UNLOCKED, stringList(data.unlockedAbilities()));
-        tag.put(OccultMessages.F_RITUALS, stringList(data.knownRituals()));
+        tag.put(OccultMessages.F_UNLOCKED, stringList(new java.util.ArrayList<>(data.unlockedAbilities())));
+        tag.put(OccultMessages.F_RITUALS, stringList(new java.util.ArrayList<>(data.knownRituals())));
         tag.putBoolean(OccultMessages.F_BEYOND, data.beyondUnlocked());
         PacketDistributor.sendToPlayer(player, new ToClient(tag));
     }

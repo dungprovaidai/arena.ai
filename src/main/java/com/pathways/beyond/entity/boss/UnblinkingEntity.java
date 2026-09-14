@@ -388,11 +388,6 @@ public class UnblinkingEntity extends Monster {
     }
 
     @Override
-    public boolean canChangeDimensions() {
-        return false;
-    }
-
-    @Override
     public boolean fireImmune() {
         return true;
     }
@@ -480,7 +475,7 @@ public class UnblinkingEntity extends Monster {
     }
 
     @Override
-    public boolean isPreventingPlayerRest(ServerPlayer player) {
+    public boolean isPreventingPlayerRest(net.minecraft.world.entity.player.Player player) {
         return true;
     }
 

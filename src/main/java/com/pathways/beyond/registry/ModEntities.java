@@ -97,12 +97,6 @@ public final class ModEntities {
                     .clientTrackingRange(10)
                     .build("the_unblinking"));
 
-    /** Lazy icon lookup: tab icons are evaluated after every registry is populated. */
-    private static ItemStack icon(String id) {
-        return new ItemStack(net.minecraft.core.registries.BuiltInRegistries.ITEM.get(
-                net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(MOD_ID, id)));
-    }
-
     public static void register(net.neoforged.bus.api.IEventBus bus) {
         ENTITIES.register(bus);
     }

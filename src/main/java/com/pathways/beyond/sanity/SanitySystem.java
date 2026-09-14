@@ -137,6 +137,23 @@ public final class SanitySystem {
         return true;
     }
 
+    /** Operator helper: force the corruption value (used by /pathways corruption). */
+    public static void setCorruption(ServerPlayer player, float value) {
+        OccultState state = ModAttachments.occult(player);
+        state.setCorruption(clamp(value));
+        ModNetwork.sendOccultSync(player);
+    }
+
+    /** Warn a player who has just logged in while still in the worst sanity tier. */
+    public static void alertIfLostControl(ServerPlayer player) {
+        OccultState state = ModAttachments.occult(player);
+        if (state.sanity() <= 0.0f) {
+            player.displayClientMessage(net.minecraft.network.chat.Component.literal(
+                    "You are not in control. Something else has been using your hands.")
+                    .withStyle(net.minecraft.ChatFormatting.DARK_RED), false);
+        }
+    }
+
     public static void addCorruption(ServerPlayer player, float amount) {
         OccultState state = ModAttachments.occult(player);
         CorruptionStage before = stage(state.corruption());

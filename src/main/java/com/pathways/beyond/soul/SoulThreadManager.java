@@ -17,7 +17,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.Monster;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -302,6 +302,17 @@ public final class SoulThreadManager {
     }
 
     /** Every binding that involves a given entity, for rendering on the client. */
+    /** How many threads this player currently holds (used by /pathways info). */
+    public static int boundCount(ServerPlayer player) {
+        int count = 0;
+        for (Binding binding : BINDINGS.values()) {
+            if (binding.owner().equals(player.getUUID())) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public static boolean isBound(int entityId) {
         return BINDINGS.containsKey(entityId);
     }

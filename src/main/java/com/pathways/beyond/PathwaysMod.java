@@ -143,7 +143,10 @@ public class PathwaysMod {
     }
 
     private static void onPlayerClone(PlayerEvent.Clone event) {
-        ModAttachments.copyOnRespawn(event.getOriginal(), event.getEntity());
+        if (event.getOriginal() instanceof ServerPlayer original
+                && event.getEntity() instanceof ServerPlayer replacement) {
+            ModAttachments.copyOnRespawn(original, replacement);
+        }
     }
 
     private static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {

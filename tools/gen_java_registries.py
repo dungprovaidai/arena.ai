@@ -163,6 +163,9 @@ def gen_pathway_data():
            "            Map.entry(\"the_fool\", List.of(\"between_two_truths\", \"unreality_walk\", \"the_space_between\", \"the_noticing_dawn\"))",
            "    );",
            "",
+           "    /** Abilities for pathways that are not yet implemented: registered but inert. */",
+           "    private static final List<String> PLACEHOLDER = List.of();",
+           "",
            ]
     pathway_blocks = []
     for p in PATHWAYS:
@@ -191,9 +194,6 @@ def gen_pathway_data():
     out.append("    public static final List<PathwayDef> ALL = List.of(")
     out.append(",\n".join(pathway_blocks))
     out += ["    );",
-            "",
-            "    /** Abilities for pathways that are not yet implemented: registered but inert. */",
-            "    private static final List<String> PLACEHOLDER = List.of();",
             "",
             "    public static PathwayDef byId(String id) {",
             "        for (PathwayDef p : ALL) {",
@@ -362,13 +362,7 @@ def gen_blocks():
         out.append(f'    public static final DeferredItem<BlockItem> {const}_ITEM =')
         out.append(f'            BLOCK_ITEMS.registerSimpleBlockItem("{bid}", {const});')
         out.append("")
-    out += ["    /** Lazy icon lookup: tab icons are evaluated after every registry is populated. */",
-            "    private static ItemStack icon(String id) {",
-            "        return new ItemStack(net.minecraft.core.registries.BuiltInRegistries.ITEM.get(",
-            "                net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(MOD_ID, id)));",
-            "    }",
-            "",
-            "    public static void register(net.neoforged.bus.api.IEventBus bus) {",
+    out += ["    public static void register(net.neoforged.bus.api.IEventBus bus) {",
             "        BLOCKS.register(bus);",
             "        BLOCK_ITEMS.register(bus);",
             "    }",
@@ -485,13 +479,7 @@ def gen_entities():
         out.append(f'                    .clientTrackingRange(10)')
         out.append(f'                    .build("{eid}"));')
         out.append("")
-    out += ["    /** Lazy icon lookup: tab icons are evaluated after every registry is populated. */",
-            "    private static ItemStack icon(String id) {",
-            "        return new ItemStack(net.minecraft.core.registries.BuiltInRegistries.ITEM.get(",
-            "                net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(MOD_ID, id)));",
-            "    }",
-            "",
-            "    public static void register(net.neoforged.bus.api.IEventBus bus) {",
+    out += ["    public static void register(net.neoforged.bus.api.IEventBus bus) {",
             "        ENTITIES.register(bus);",
             "    }",
             "}",

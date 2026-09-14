@@ -44,6 +44,9 @@ public final class PathwayData {
             Map.entry("the_fool", List.of("between_two_truths", "unreality_walk", "the_space_between", "the_noticing_dawn"))
     );
 
+    /** Abilities for pathways that are not yet implemented: registered but inert. */
+    private static final List<String> PLACEHOLDER = List.of();
+
     private static final Map<String, List<String>> ABILITIES_SUN = Map.ofEntries(Map.entry("bard", PLACEHOLDER), Map.entry("light_supplicant", PLACEHOLDER), Map.entry("solar_high_priest", PLACEHOLDER), Map.entry("notary", PLACEHOLDER), Map.entry("priest_of_light", PLACEHOLDER), Map.entry("unshadowed", PLACEHOLDER), Map.entry("justice_knight", PLACEHOLDER), Map.entry("sun_priest", PLACEHOLDER), Map.entry("sun", PLACEHOLDER), Map.entry("sun_god", PLACEHOLDER));
     private static final Map<String, List<String>> ABILITIES_DEATH = Map.ofEntries(Map.entry("corpse_collector", PLACEHOLDER), Map.entry("gravedigger", PLACEHOLDER), Map.entry("spirit_medium", PLACEHOLDER), Map.entry("undertaker", PLACEHOLDER), Map.entry("gatekeeper", PLACEHOLDER), Map.entry("carrion_king", PLACEHOLDER), Map.entry("pale_rider", PLACEHOLDER), Map.entry("death_priest", PLACEHOLDER), Map.entry("death", PLACEHOLDER), Map.entry("pale_crown", PLACEHOLDER));
     private static final Map<String, List<String>> ABILITIES_DOOR = Map.ofEntries(Map.entry("apprentice", PLACEHOLDER), Map.entry("traveller", PLACEHOLDER), Map.entry("sleight_of_hand", PLACEHOLDER), Map.entry("dimensional_walker", PLACEHOLDER), Map.entry("sealing_master", PLACEHOLDER), Map.entry("gate", PLACEHOLDER), Map.entry("key_of_doors", PLACEHOLDER), Map.entry("doors_end", PLACEHOLDER), Map.entry("door", PLACEHOLDER), Map.entry("the_hinge", PLACEHOLDER));
@@ -190,9 +193,6 @@ public final class PathwayData {
                 new SequenceDef(0, "the_fertile_void", "The Fertile Void", "From nothing, something always grows. Always something.", ABILITIES_MOTHER.get("the_fertile_void"), null)
                     ))
     );
-
-    /** Abilities for pathways that are not yet implemented: registered but inert. */
-    private static final List<String> PLACEHOLDER = List.of();
 
     public static PathwayDef byId(String id) {
         for (PathwayDef p : ALL) {

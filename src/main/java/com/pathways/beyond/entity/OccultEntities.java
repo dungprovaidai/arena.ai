@@ -58,7 +58,7 @@ public final class OccultEntities {
     // Shared state
     // ===================================================================================
     protected static final EntityDataAccessor<Integer> DATA_STATE =
-            SynchedEntityData.defineId(OccultEntities.class, EntityDataSerializers.INT);
+            SynchedEntityData.defineId(UncannyEntity.class, EntityDataSerializers.INT);
 
     /** How hostile an uncanny humanoid is on a scale from "watch" to "kill". */
     public enum Presence { WATCHING, APPROACHING, HUNTING, FLEEING }
@@ -67,6 +67,11 @@ public final class OccultEntities {
     // Base: the uncanny humanoid
     // ===================================================================================
     public abstract static class UncannyEntity extends Monster {
+        /** Convenience: entity logic here only ever runs on the logical server. */
+        protected ServerLevel serverLevel() {
+            return (ServerLevel) level();
+        }
+
         private float asymmetry = 0.5f;
 
         protected UncannyEntity(EntityType<? extends UncannyEntity> type, Level level) {
@@ -137,7 +142,8 @@ public final class OccultEntities {
 
         /** Players who are deep in a ritual are not attacked: the circle is a truce. */
         private static boolean isProtected(Player player) {
-            return com.pathways.beyond.ritual.RitualManager.isPlayerInActiveRitual(player);
+            return player instanceof ServerPlayer serverPlayer
+                    && com.pathways.beyond.ritual.RitualManager.isPlayerInActiveRitual(serverPlayer);
         }
 
         @Override
@@ -730,7 +736,7 @@ public final class OccultEntities {
             if (decoy) {
                 // dispelling the decoy reveals what it was made of
                 if (!level().isClientSide()) {
-                    ((ServerLevel) level()).sendParticles(ModParticles.ChromaticSpeck.get(),
+                    serverLevel().sendParticles(ModParticles.ChromaticSpeck.get(),
                             getX(), getY() + 1.0, getZ(), 40, 0.5, 0.8, 0.5, 0.05);
                     level().playSound(null, blockPosition(), ModSounds.FacelessShift.get(),
                             SoundSource.HOSTILE, 0.8f, 1.2f);
@@ -902,7 +908,7 @@ public final class OccultEntities {
         public void aiStep() {
             super.aiStep();
             if (!level().isClientSide() && tickCount % 20 == 0) {
-                level().sendParticles(ModParticles.SpiritMote.get(), getX(), getY() + 1.0, getZ(),
+                serverLevel().sendParticles(ModParticles.SpiritMote.get(), getX(), getY() + 1.0, getZ(),
                         1, 0.2, 0.3, 0.2, 0.0);
             }
         }

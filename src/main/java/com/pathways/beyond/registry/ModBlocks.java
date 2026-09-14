@@ -198,12 +198,6 @@ public final class ModBlocks {
     public static final DeferredItem<BlockItem> MemoryShardBlock_ITEM =
             BLOCK_ITEMS.registerSimpleBlockItem("memory_shard_block", MemoryShardBlock);
 
-    /** Lazy icon lookup: tab icons are evaluated after every registry is populated. */
-    private static ItemStack icon(String id) {
-        return new ItemStack(net.minecraft.core.registries.BuiltInRegistries.ITEM.get(
-                net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(MOD_ID, id)));
-    }
-
     public static void register(net.neoforged.bus.api.IEventBus bus) {
         BLOCKS.register(bus);
         BLOCK_ITEMS.register(bus);

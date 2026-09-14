@@ -84,7 +84,8 @@ public final class ClientEvents {
     /** Fog density: volumetric-looking in the Spirit World, thicker at Corruption and Dread. */
     private static void onRenderFog(ViewportEvent.RenderFog event) {
         Minecraft minecraft = Minecraft.getInstance();
-        if (minecraft.level == null || event.getType() != net.minecraft.client.renderer.FogRenderer.FogMode.FOG_TERRAIN) {
+        if (minecraft.level == null
+                || event.getType() != net.minecraft.client.renderer.FogRenderer.FogType.FOG_TERRAIN) {
             return;
         }
         float packetFog = ClientPacketHandler.fogDensity();

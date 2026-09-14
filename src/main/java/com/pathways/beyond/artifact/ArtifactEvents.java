@@ -1,6 +1,7 @@
 package com.pathways.beyond.artifact;
 
 import com.pathways.beyond.item.OccultItems;
+import com.pathways.beyond.item.SealedArtifactStack;
 import com.pathways.beyond.network.ModNetwork;
 import com.pathways.beyond.network.OccultMessages;
 import com.pathways.beyond.pathway.PlayerPathway;
@@ -47,7 +48,7 @@ public final class ArtifactEvents {
 
         // ---- THE EYE OF SOLOMON: reveals, at the cost of the mind ------------------------
         if (main.is(ModItems.EyeOfSolomon.get()) || off.is(ModItems.EyeOfSolomon.get())) {
-            if (!OccultItems.SealedArtifactStack.isUnsealed(main.is(ModItems.EyeOfSolomon.get()) ? main : off)) {
+            if (!SealedArtifactStack.isUnsealed(main.is(ModItems.EyeOfSolomon.get()) ? main : off)) {
                 player.displayClientMessage(Component.literal(
                         "The reliquary is still sealed. It needs unsealing at a ritual altar.")
                         .withStyle(net.minecraft.ChatFormatting.GRAY), true);

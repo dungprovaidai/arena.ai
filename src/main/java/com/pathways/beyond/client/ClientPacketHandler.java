@@ -57,19 +57,19 @@ public final class ClientPacketHandler {
     // Dispatch
     // ===================================================================================
     public static void handle(CompoundTag tag) {
-        String kind = tag.getString(OccultMessages.F_KIND);
+        String kind = tag.getString(OccultMessages.KIND);
         switch (kind) {
-            case OccultMessages.S_PATHWAY_SYNC -> applyPathway(tag);
-            case OccultMessages.S_OCCULT_SYNC -> applyOccult(tag);
-            case OccultMessages.S_VISUAL -> applyVisual(tag);
-            case OccultMessages.S_HALLUCINATION -> applyHallucination(tag);
-            case OccultMessages.S_ABILITY_FEEDBACK -> lastFeedback = tag.getString(OccultMessages.F_MESSAGE);
-            case OccultMessages.S_SPIRIT_STATE -> {
-                spiritForm = tag.getBoolean(OccultMessages.F_FLAG);
+            case OccultMessages.C_PATHWAY_SYNC -> applyPathway(tag);
+            case OccultMessages.C_OCCULT_SYNC -> applyOccult(tag);
+            case OccultMessages.C_VISUAL -> applyVisual(tag);
+            case OccultMessages.C_HALLUCINATION -> applyHallucination(tag);
+            case OccultMessages.C_ABILITY_FEEDBACK -> lastFeedback = tag.getString(OccultMessages.F_MESSAGE);
+            case OccultMessages.C_SPIRIT_STATE -> {
+                spiritForm = tag.getBoolean(OccultMessages.F_SPIRIT);
                 tetherStrain = tag.getInt(OccultMessages.F_STRAIN);
             }
-            case OccultMessages.S_RITUAL_STATE -> ClientScreens.onRitualState(tag);
-            case OccultMessages.S_THREAD_SYNC -> ClientThreadRender.accept(tag);
+            case OccultMessages.C_RITUAL_STATE -> ClientScreens.onRitualState(tag);
+            case OccultMessages.C_THREAD_SYNC -> ClientThreadRender.accept(tag);
             default -> {
             }
         }
@@ -97,15 +97,15 @@ public final class ClientPacketHandler {
     private static void applyOccult(CompoundTag tag) {
         sanity = tag.getFloat(OccultMessages.F_SANITY);
         corruption = tag.getFloat(OccultMessages.F_CORRUPTION);
-        spiritForm = tag.getBoolean(OccultMessages.F_FLAG);
+        spiritForm = tag.getBoolean(OccultMessages.F_SPIRIT);
     }
 
     private static void applyVisual(CompoundTag tag) {
-        int id = tag.getInt(OccultMessages.F_VISUAL);
+        int id = tag.getInt(OccultMessages.F_TYPE);
         double x = tag.getDouble(OccultMessages.F_X);
         double y = tag.getDouble(OccultMessages.F_Y);
         double z = tag.getDouble(OccultMessages.F_Z);
-        float strength = tag.getFloat(OccultMessages.F_STRENGTH);
+        float strength = tag.getFloat(OccultMessages.F_INTENSITY);
         int duration = tag.getInt(OccultMessages.F_DURATION);
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.level == null) {
@@ -242,13 +242,13 @@ public final class ClientPacketHandler {
 
     private static void applyHallucination(CompoundTag tag) {
         HALLUCINATIONS.add(new Hallucination(
-                tag.getInt(OccultMessages.F_HALLUCINATION),
+                tag.getInt(OccultMessages.F_TYPE),
                 tag.getDouble(OccultMessages.F_X),
                 tag.getDouble(OccultMessages.F_Y),
                 tag.getDouble(OccultMessages.F_Z),
-                tag.getFloat(OccultMessages.F_STRENGTH),
+                tag.getFloat(OccultMessages.F_INTENSITY),
                 tag.getInt(OccultMessages.F_DURATION)));
-        int kind = tag.getInt(OccultMessages.F_HALLUCINATION);
+        int kind = tag.getInt(OccultMessages.F_TYPE);
         if (kind == OccultMessages.H_CAMERA_SHAKE) {
             cameraShake = Math.max(cameraShake, 6.0f);
         } else if (kind == OccultMessages.H_TEXT_GLITCH) {
