@@ -1,6 +1,7 @@
 package com.pathways.beyond.ritual;
 
 import com.pathways.beyond.item.OccultItems;
+import com.pathways.beyond.PathwaysMod;
 import com.pathways.beyond.pathway.PlayerPathway;
 import com.pathways.beyond.registry.ModItems;
 
@@ -57,10 +58,32 @@ public final class RitualRecipes {
         RECIPES.add(recipe);
     }
 
+    /** Set once the table has been built. */
+    private static boolean built;
+
+    /**
+     * Builds the book on first use, never while classes are still initialising.
+     *
+     * <p>Every component in a recipe holds a real registered {@code Item}. Building this table in a
+     * static initialiser meant resolving those items before the item registry existed, which fails
+     * the class load outright - so the table is deferred to the first caller instead.
+     */
+    private static void ensureBuilt() {
+        if (built) {
+            return;
+        }
+        built = true;
+        try {
+            build();
+        } catch (RuntimeException | LinkageError failure) {
+            PathwaysMod.LOGGER.error("[Pathways] ritual table could not be built", failure);
+        }
+    }
+
     // ===================================================================================
     // The recipe book. Ordered by how badly they can go wrong.
     // ===================================================================================
-    static {
+    private static void build() {
         add(new RitualRecipe(
                 "circle_of_seeing", "Circle of Seeing", Outcome.REVEAL_KNOWLEDGE, 9, 9, 240, 2, 4,
                 90.0f, 0.15f,
@@ -175,10 +198,12 @@ public final class RitualRecipes {
     }
 
     public static List<RitualRecipe> all() {
+        ensureBuilt();
         return List.copyOf(RECIPES);
     }
 
     public static RitualRecipe byId(String id) {
+        ensureBuilt();
         for (RitualRecipe recipe : RECIPES) {
             if (recipe.id().equals(id)) {
                 return recipe;
@@ -188,6 +213,7 @@ public final class RitualRecipes {
     }
 
     public static List<RitualRecipe> forPlayer(PlayerPathway pathway) {
+        ensureBuilt();
         return RECIPES.stream().filter(r -> r.isAvailableTo(pathway)).toList();
     }
 

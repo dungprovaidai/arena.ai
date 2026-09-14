@@ -12,6 +12,11 @@ on:
         type: boolean
         required: true
         default: true
+      smoke_test:
+        description: 'Boot a dedicated server and a client with the mod before releasing'
+        type: boolean
+        required: true
+        default: true
   push:
     tags:
       - 'v*'
@@ -23,6 +28,7 @@ jobs:
   build:
     name: Build jar
     runs-on: ubuntu-latest
+    timeout-minutes: 90
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -57,40 +63,6 @@ jobs:
           echo '::group::Compile errors'
           grep -E "error:|\.java:[0-9]+: error" build.log | head -n 80 || true
           echo '::endgroup::'
-
-      - name: Publish failure diagnostics as a commit comment
-        if: failure()
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          {
-            echo "### Build failed for ${GITHUB_SHA:0:7}"
-            echo
-            echo '#### Compile errors'
-            echo '```text'
-            grep -E "\.java:[0-9]+: error|error: cannot find symbol|error: " build.log 2>/dev/null | head -n 120 || echo 'none matched'
-            echo '```'
-            echo '#### Compile error detail (with symbols)'
-            echo '```text'
-            grep -A3 "error:" build.log 2>/dev/null | head -c 50000 || true
-            echo '```'
-            echo '#### Gradle failure summary'
-            echo '```text'
-            sed -n '/FAILURE: Build failed/,/^\* Try:/p' build.log 2>/dev/null | head -n 60 || true
-            echo '```'
-            if [ -f verify.log ]; then
-              echo '#### Jar verification'
-              echo '```text'
-              tail -c 4000 verify.log || true
-              echo '```'
-            fi
-            echo '#### Tail of build log'
-            echo '```text'
-            tail -c 12000 build.log 2>/dev/null || echo 'no build.log'
-            echo '```'
-          } > diag.md
-          gh api -X POST "repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/comments" \
-            -F body=@diag.md >/dev/null && echo "diagnostics posted"
 
       - name: Resolve artefact name
         id: jar
@@ -134,6 +106,125 @@ jobs:
             cat verify.log
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Smoke test - dedicated server
+        id: smoke_server
+        if: success()
+        continue-on-error: true
+        run: |
+          set -uo pipefail
+          for d in run run/server run/client; do mkdir -p "$d"; echo 'eula=true' > "$d/eula.txt"; done
+          timeout --signal=INT --kill-after=30 720 gradle runServer --no-daemon --console=plain < /dev/null > smoke-server.log 2>&1
+          echo "gradle exit: $? (124/130 = still running when the timer fired)"
+          {
+            echo '#### Dedicated server smoke test'
+            echo '```text'
+            grep -nE "Pathways\]|ExceptionInInitializerError|failed to load correctly|Caused by:|Done \(|Starting minecraft server|error" smoke-server.log 2>/dev/null | tail -n 60 || echo 'no markers found'
+            echo '```'
+            for log in run/logs/latest.log run/server/logs/latest.log; do
+              if [ -f "$log" ]; then
+                echo "#### $log"
+                echo '```text'
+                grep -nE -A18 "ExceptionInInitializerError|failed to load correctly|ModLoadingException|Caused by:" "$log" 2>/dev/null | tail -n 120 || echo 'clean - no initialisation errors'
+                echo '```'
+                echo '```text'
+                tail -n 25 "$log" 2>/dev/null || true
+                echo '```'
+              fi
+            done
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Smoke test - client (headless)
+        id: smoke_client
+        if: always() && steps.smoke_server.outcome != 'skipped'
+        continue-on-error: true
+        run: |
+          set -uo pipefail
+          sudo apt-get -qq update >/dev/null 2>&1 || true
+          sudo apt-get -qq install -y xvfb libgl1-mesa-dri mesa-utils >/dev/null 2>&1 || true
+          timeout --signal=INT --kill-after=30 1200 xvfb-run -a -s '-screen 0 1280x720x24' \
+            gradle runClient --no-daemon --console=plain < /dev/null > smoke-client.log 2>&1
+          echo "gradle exit: $? (124/130 = still running when the timer fired)"
+          {
+            echo '#### Client smoke test'
+            echo '```text'
+            grep -nE "Pathways\]|ExceptionInInitializerError|failed to load correctly|Caused by:|LWJGL|Setting user|OpenAL" smoke-client.log 2>/dev/null | tail -n 60 || echo 'no markers found'
+            echo '```'
+            for log in run/logs/latest.log run/client/logs/latest.log; do
+              if [ -f "$log" ]; then
+                echo "#### $log"
+                echo '```text'
+                grep -nE -A18 "ExceptionInInitializerError|failed to load correctly|ModLoadingException|Caused by:" "$log" 2>/dev/null | tail -n 150 || echo 'clean - no initialisation errors'
+                echo '```'
+                echo '```text'
+                tail -n 25 "$log" 2>/dev/null || true
+                echo '```'
+              fi
+            done
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Fail if the mod did not load
+        if: always()
+        run: |
+          set -uo pipefail
+          if grep -qE "ExceptionInInitializerError|failed to load correctly" smoke-server.log smoke-client.log 2>/dev/null; then
+            echo "The mod failed to initialise. Root causes seen:"
+            grep -hoE "Caused by: .*" smoke-server.log smoke-client.log 2>/dev/null | sort -u | head -n 20
+            echo "Our frames:"
+            grep -hoE "at com\.pathways\.beyond[^ ]*" smoke-server.log smoke-client.log 2>/dev/null | sort -u | head -n 20
+            exit 1
+          fi
+          echo "no mod initialisation failure detected in either smoke test"
+
+      - name: Publish failure diagnostics as a commit comment
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          {
+            echo "### Build failed for ${GITHUB_SHA:0:7}"
+            echo
+            echo '#### Compile errors'
+            echo '```text'
+            grep -E "\.java:[0-9]+: error|error: cannot find symbol|error: " build.log 2>/dev/null | head -n 120 || echo 'none matched'
+            echo '```'
+            echo '#### Compile error detail (with symbols)'
+            echo '```text'
+            grep -A3 "error:" build.log 2>/dev/null | head -c 50000 || true
+            echo '```'
+            for f in smoke-server.log smoke-client.log; do
+              if [ -f "$f" ]; then
+                echo "#### $f - initialisation failure"
+                echo '```text'
+                grep -nE -B3 -A30 "ExceptionInInitializerError|failed to load correctly|Caused by:" "$f" 2>/dev/null | head -c 30000 || true
+                echo '```'
+              fi
+            done
+            for log in run/logs/latest.log run/server/logs/latest.log run/client/logs/latest.log; do
+              if [ -f "$log" ]; then
+                echo "#### $log - failure context"
+                echo '```text'
+                grep -nE -B3 -A30 "ExceptionInInitializerError|failed to load correctly|Caused by:" "$log" 2>/dev/null | head -c 40000 || true
+                echo '```'
+              fi
+            done
+            echo '#### Gradle failure summary'
+            echo '```text'
+            sed -n '/FAILURE: Build failed/,/^\* Try:/p' build.log 2>/dev/null | head -n 60 || true
+            echo '```'
+            if [ -f verify.log ]; then
+              echo '#### Jar verification'
+              echo '```text'
+              tail -c 4000 verify.log || true
+              echo '```'
+            fi
+            echo '#### Tail of build log'
+            echo '```text'
+            tail -c 12000 build.log 2>/dev/null || echo 'no build.log'
+            echo '```'
+          } > diag.md
+          gh api -X POST "repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/comments" \
+            -F body=@diag.md >/dev/null && echo "diagnostics posted"
 
       - name: Upload jar artefact
         if: success()
