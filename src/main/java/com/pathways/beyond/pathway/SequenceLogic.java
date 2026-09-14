@@ -341,7 +341,7 @@ public final class SequenceLogic {
             state.addCorruption(3.0f);
             player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 1));
             player.addEffect(new MobEffectInstance(ModEffects.Hallucinating, 400, 0));
-            ModNetwork.sendHallucination(player, OccultMessages.H_WISPS,
+            ModNetwork.sendHallucination(player, OccultMessages.H_WHISPER,
                     player.getX(), player.getY(), player.getZ(), 1.0f, 120, "reject");
         }
         ModNetwork.sendPathwaySync(player);

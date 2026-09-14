@@ -908,7 +908,7 @@ public final class OccultEntities {
         public void aiStep() {
             super.aiStep();
             if (!level().isClientSide() && tickCount % 20 == 0) {
-                serverLevel().sendParticles(ModParticles.SpiritMote.get(), getX(), getY() + 1.0, getZ(),
+                ((ServerLevel) level()).sendParticles(ModParticles.SpiritMote.get(), getX(), getY() + 1.0, getZ(),
                         1, 0.2, 0.3, 0.2, 0.0);
             }
         }

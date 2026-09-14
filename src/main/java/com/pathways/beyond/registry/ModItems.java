@@ -125,39 +125,39 @@ public final class ModItems {
     // ---- sealed artifacts ----
     /** The Eye of Solomon - A brass-and-glass eye set in a sealed reliquary. The pupil tracks things with no bodies. */
     public static final DeferredItem<Item> EyeOfSolomon = ITEMS.register("eye_of_solomon",
-            () -> new EyeOfSolomonItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+            () -> new OccultItems.EyeOfSolomonItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
     /** The Black Book - Bound in something that was never an animal. The pages rearrange while you read them. */
     public static final DeferredItem<Item> BlackBook = ITEMS.register("black_book",
-            () -> new BlackBookItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+            () -> new OccultItems.BlackBookItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
     /** The Whispering Bell - A cracked brass bell. Its clapper was removed by someone who was careful. */
     public static final DeferredItem<Item> WhisperingBell = ITEMS.register("whispering_bell",
-            () -> new WhisperingBellItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
+            () -> new OccultItems.WhisperingBellItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
     /** The Brass Key - A key with no matching lock, warm to the touch, engraved 'FOR EMERGENCIES ONLY'. */
     public static final DeferredItem<Item> BrassKey = ITEMS.register("brass_key",
-            () -> new BrassKeyItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+            () -> new OccultItems.BrassKeyItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
 
     // ---- occult tools ----
     /** Pathway Codex - Victorian occult ledger: Pathway screen, Sequences, digestion and lore. */
     public static final DeferredItem<Item> PathwayCodex = ITEMS.register("pathway_codex",
-            () -> new CodexItem(new Item.Properties().stacksTo(1)));
+            () -> new OccultItems.CodexItem(new Item.Properties().stacksTo(1)));
     /** Spool of Soul Thread - Crafting component; the raw material of binding. */
     public static final DeferredItem<Item> SoulThreadSpool = ITEMS.register("soul_thread_spool",
-            () -> new SimpleLoreItem(new Item.Properties().stacksTo(1)));
+            () -> new OccultItems.SimpleLoreItem(new Item.Properties().stacksTo(1)));
     /** Thread Shears - Cut a bound Soul Thread. The puppet remembers being cut. */
     public static final DeferredItem<Item> ThreadShears = ITEMS.register("thread_shears",
-            () -> new ThreadShearsItem(new Item.Properties().stacksTo(1)));
+            () -> new OccultItems.ThreadShearsItem(new Item.Properties().stacksTo(1)));
     /** Ritual Dagger - Open a palm for the circle; provides ritual blood. */
     public static final DeferredItem<Item> RitualDagger = ITEMS.register("ritual_dagger",
-            () -> new RitualDaggerItem(new Item.Properties().stacksTo(1)));
+            () -> new OccultItems.RitualDaggerItem(new Item.Properties().stacksTo(1)));
     /** Occult Compass - Points to the nearest supernatural structure or active ritual. */
     public static final DeferredItem<Item> OccultCompass = ITEMS.register("occult_compass",
-            () -> new OccultCompassItem(new Item.Properties().stacksTo(1)));
+            () -> new OccultItems.OccultCompassItem(new Item.Properties().stacksTo(1)));
     /** Ward Charm - Slows Sanity loss and blocks one possession attempt. Then it is spent. */
     public static final DeferredItem<Item> WardCharm = ITEMS.register("ward_charm",
-            () -> new WardCharmItem(new Item.Properties().stacksTo(1)));
+            () -> new OccultItems.WardCharmItem(new Item.Properties().stacksTo(1)));
     /** Spirit Tonic - Restores Sanity at the cost of a temporary Corruption tick. */
     public static final DeferredItem<Item> SpiritTonic = ITEMS.register("spirit_tonic",
-            () -> new SpiritTonicItem(new Item.Properties().stacksTo(1)));
+            () -> new OccultItems.SpiritTonicItem(new Item.Properties().stacksTo(1)));
 
     // ---- drops ----
     public static final DeferredItem<Item> CORRUPTED_HEART_DROP = ITEMS.register("corrupted_heart",

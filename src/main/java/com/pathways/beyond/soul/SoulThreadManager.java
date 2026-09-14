@@ -119,7 +119,7 @@ public final class SoulThreadManager {
         List<LivingEntity> puppets = ownedPuppets(player);
         if (puppets.isEmpty()) {
             player.displayClientMessage(net.minecraft.network.chat.Component.literal(
-                    "No threads are tied to your fingers.").withStyle(net.minecraft.chat.ChatFormatting.GRAY), true);
+                    "No threads are tied to your fingers.").withStyle(net.minecraft.network.chat.ChatFormatting.GRAY), true);
             return;
         }
         ServerLevel level = player.serverLevel();
@@ -229,7 +229,7 @@ public final class SoulThreadManager {
                 living.getPersistentData().remove("pathways_puppet_owner");
                 dead.add(entry.getKey());
                 owner.displayClientMessage(net.minecraft.network.chat.Component.literal(
-                        "A thread snapped on its own.").withStyle(net.minecraft.chat.ChatFormatting.DARK_RED), true);
+                        "A thread snapped on its own.").withStyle(net.minecraft.network.chat.ChatFormatting.DARK_RED), true);
                 continue;
             }
 
@@ -294,10 +294,10 @@ public final class SoulThreadManager {
                 living.getType().getDescription().getString() + ": " + state
                         + " (" + String.format("%.0f", living.getHealth()) + "/"
                         + String.format("%.0f", living.getMaxHealth()) + ")")
-                .withStyle(net.minecraft.chat.ChatFormatting.DARK_AQUA), true);
+                .withStyle(net.minecraft.network.chat.ChatFormatting.DARK_AQUA), true);
         if (tag.contains("pathways_puppet_owner")) {
             player.serverLevel().sendParticles(ModParticles.SoulFlow.get(), living.getX(),
-                    living.getY() + living.getHeight() * 0.6, living.getZ(), 10, 0.3, 0.3, 0.3, 0.02);
+                    living.getY() + living.getBbHeight() * 0.6, living.getZ(), 10, 0.3, 0.3, 0.3, 0.02);
         }
     }
 
@@ -306,7 +306,7 @@ public final class SoulThreadManager {
     public static int boundCount(ServerPlayer player) {
         int count = 0;
         for (Binding binding : BINDINGS.values()) {
-            if (binding.owner().equals(player.getUUID())) {
+            if (binding.owner.equals(player.getUUID())) {
                 count++;
             }
         }

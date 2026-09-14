@@ -160,7 +160,7 @@ public final class PathwayEvents {
         if (event.getEntity() instanceof ServerPlayer player) {
             ModNetwork.sendPathwaySync(player);
             ModNetwork.sendOccultSync(player);
-            SoulThreadManager.sendVisibleThreads(player);
+            SoulThreadManager.sendVisibleThreads(player, 64.0);
             SanitySystem.alertIfLostControl(player);
         }
     }

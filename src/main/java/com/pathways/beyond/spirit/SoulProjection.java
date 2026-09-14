@@ -133,7 +133,7 @@ public final class SoulProjection {
                                                                                        ServerPlayer player) {
         return level.getEntitiesOfClass(com.pathways.beyond.entity.OccultEntities.PlayerBodyShellEntity.class,
                         player.getBoundingBox().inflate(TETHER_HARD_LIMIT + 32.0),
-                        shell -> shell.getOwner() != null && shell.getOwner().equals(player.getUUID()))
+                        shell -> shell.owner() != null && shell.owner().equals(player.getUUID()))
                 .stream()
                 .findFirst()
                 .orElse(null);
@@ -249,8 +249,10 @@ public final class SoulProjection {
         }
         if (player.isShiftKeyDown()) {
             player.setDeltaMovement(player.getDeltaMovement().add(0, -0.08, 0));
-        } else if (player.jumping) {
+        } else if (player.getViewVector(1.0f).y > 0.45) {
             player.setDeltaMovement(player.getDeltaMovement().add(0, 0.08, 0));
+        } else if (player.getViewVector(1.0f).y < -0.45) {
+            player.setDeltaMovement(player.getDeltaMovement().add(0, -0.08, 0));
         }
         if (player.fallDistance > 2.0f) {
             player.fallDistance = 0.0f;

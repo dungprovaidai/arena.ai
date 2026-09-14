@@ -66,7 +66,7 @@ public final class ClientPacketHandler {
             case OccultMessages.C_ABILITY_FEEDBACK -> lastFeedback = tag.getString(OccultMessages.F_MESSAGE);
             case OccultMessages.C_SPIRIT_STATE -> {
                 spiritForm = tag.getBoolean(OccultMessages.F_SPIRIT);
-                tetherStrain = tag.getInt(OccultMessages.F_STRAIN);
+                tetherStrain = tag.getInt(OccultMessages.F_TETHER);
             }
             case OccultMessages.C_RITUAL_STATE -> ClientScreens.onRitualState(tag);
             case OccultMessages.C_THREAD_SYNC -> ClientThreadRender.accept(tag);
@@ -77,7 +77,7 @@ public final class ClientPacketHandler {
 
     private static void applyPathway(CompoundTag tag) {
         pathwayId = tag.getString(OccultMessages.F_PATHWAY);
-        pathwayName = tag.contains(OccultMessages.F_NAME) ? tag.getString(OccultMessages.F_NAME) : pathwayId;
+        pathwayName = pathwayId;
         sequence = tag.getInt(OccultMessages.F_SEQUENCE);
         digestion = tag.getFloat(OccultMessages.F_DIGESTION);
         unlockedAbilities = readStrings(tag, OccultMessages.F_UNLOCKED);
@@ -199,7 +199,7 @@ public final class ClientPacketHandler {
                                 : ModSounds.SpiritExit.get(),
                         SoundSource.PLAYERS, 1.0f, 1.0f, false);
             }
-            case OccultMessages.V_TRANSFORMATION -> {
+            case OccultMessages.V_SEQUENCE_ADVANCE -> {
                 cameraShake = Math.max(cameraShake, 20.0f);
                 for (int i = 0; i < 90; i++) {
                     minecraft.level.addParticle(ModParticles.BlackWisp.get(), x, y, z,
@@ -331,13 +331,13 @@ public final class ClientPacketHandler {
                             false);
                 }
             }
-            case OccultMessages.H_BREATHING -> {
+            case OccultMessages.H_PHANTOM_SOUND -> {
                 if (random.nextFloat() < 0.12f) {
                     minecraft.level.playLocalSound(x, y, z, ModSounds.Breathing.get(),
                             SoundSource.AMBIENT, hallucination.strength(), 0.7f, false);
                 }
             }
-            case OccultMessages.H_FOOTSTEPS -> {
+            case OccultMessages.H_FAKE_FOOTSTEP -> {
                 if (random.nextFloat() < 0.2f) {
                     minecraft.level.playLocalSound(x, y, z, ModSounds.HollowStep.get(),
                             SoundSource.AMBIENT, hallucination.strength() * 0.8f, 1.0f, false);

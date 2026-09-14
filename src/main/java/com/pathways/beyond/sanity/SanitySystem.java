@@ -245,10 +245,6 @@ public final class SanitySystem {
         if (player.isSleeping()) {
             recovery += 0.4f;
         }
-        if (player.hasEffect(ModEffects.Clarity())) {
-            recovery += 0.05f;
-        }
-
         state.addSanity(recovery - drain);
 
         // --- tier consequences -----------------------------------------------------------

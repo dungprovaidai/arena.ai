@@ -56,7 +56,9 @@ public final class SpiritWorld {
         level.sendParticles(ModParticles.VeilSmoke.get(), altar.getX() + 0.5, altar.getY() + 1.0,
                 altar.getZ() + 0.5, 60, 1.0, 1.4, 1.0, 0.02);
         if (celebrant != null) {
-            travel(celebrant, !inSpiritWorld(level));
+            boolean alreadyAcross = level.dimension().location().toString()
+                    .startsWith("pathwaysofthebeyond:spirit_world");
+            travel(celebrant, !alreadyAcross);
         }
     }
 

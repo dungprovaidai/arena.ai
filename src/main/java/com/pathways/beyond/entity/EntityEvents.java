@@ -28,7 +28,7 @@ public final class EntityEvents {
         event.put(ModEntities.Marionette.get(), OccultEntities.MarionetteEntity.createAttributes().build());
         event.put(ModEntities.BizarroClone.get(), OccultEntities.BizarroCloneEntity.createAttributes().build());
         event.put(ModEntities.HistoricalEcho.get(), OccultEntities.HistoricalEchoEntity.createAttributes().build());
-        event.put(ModEntities.PlayerBodyShell.get(), OccultEntities.PlayerBodyShell.createAttributes().build());
+        event.put(ModEntities.PlayerBodyShell.get(), OccultEntities.PlayerBodyShellEntity.createAttributes().build());
         event.put(ModEntities.ChoirmasterOfTheVeil.get(), ChoirmasterEntity.createAttributes().build());
         event.put(ModEntities.TheUnblinking.get(), UnblinkingEntity.createAttributes().build());
     }

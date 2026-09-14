@@ -151,9 +151,19 @@ public final class OccultEffects {
     }
 
     /** Base class: one place for the shared behaviour (no instant effect, no heart particles). */
-    private abstract static class OccultEffect extends MobEffect {
+    private static class OccultEffect extends MobEffect {
         protected OccultEffect(String id, MobEffectCategory category, int colour) {
             super(category, colour);
+        }
+
+        @Override
+        public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
+            return false;
+        }
+
+        @Override
+        public boolean applyEffectTick(LivingEntity entity, int amplifier) {
+            return true;
         }
     }
 }

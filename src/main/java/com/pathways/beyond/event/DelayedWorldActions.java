@@ -34,8 +34,7 @@ public final class DelayedWorldActions {
     public static void schedule(ServerLevel level, BlockPos pos, BlockPos ignored, Runnable runnable, int delayTicks) {
         List<Action> list = PENDING.computeIfAbsent(key(level), k -> new ArrayList<>());
         // the runnable form is kept for callers that need side effects (door opening pairs)
-        list.add(new Action(pos, null, level.getGameTime() + delayTicks) {
-        });
+        list.add(new Action(pos, null, level.getGameTime() + delayTicks));
         RUNNABLES.computeIfAbsent(key(level), k -> new ArrayList<>())
                 .add(new RunnableEntry(runnable, level.getGameTime() + delayTicks));
     }

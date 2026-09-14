@@ -1,6 +1,6 @@
 package com.pathways.beyond.registry;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.pathways.beyond.spirit.SpiritChunkGenerator;
 
 import net.minecraft.core.registries.Registries;
@@ -15,11 +15,11 @@ import static com.pathways.beyond.PathwaysMod.MOD_ID;
 public final class ModChunkGenerators {
     private ModChunkGenerators() {}
 
-    public static final DeferredRegister<Codec<? extends ChunkGenerator>> CHUNK_GENERATORS =
+    public static final DeferredRegister<MapCodec<? extends ChunkGenerator>> CHUNK_GENERATORS =
             DeferredRegister.create(Registries.CHUNK_GENERATOR, MOD_ID);
 
-    public static final DeferredHolder<Codec<? extends ChunkGenerator>, Codec<? extends ChunkGenerator>>
-            SPIRIT_WASTES = CHUNK_GENERATORS.register("spirit_wastes", () -> SpiritChunkGenerator.CODEC);
+    public static final DeferredHolder<MapCodec<? extends ChunkGenerator>, MapCodec<SpiritChunkGenerator>>
+            SPIRIT_WASTES = CHUNK_GENERATORS.register("spirit_wastes", () -> SpiritChunkGenerator.MAP_CODEC);
 
     public static void register(IEventBus bus) {
         CHUNK_GENERATORS.register(bus);

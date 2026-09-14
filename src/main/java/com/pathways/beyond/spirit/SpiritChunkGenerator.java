@@ -102,7 +102,7 @@ public class SpiritChunkGenerator extends ChunkGenerator {
     // Generation
     // ===================================================================================
     @Override
-    public CompletableFuture<ChunkAccess> fillFromNoise(Executor executor, Blender blender, RandomState random,
+    public CompletableFuture<ChunkAccess> fillFromNoise(Blender blender, RandomState random,
                                                         StructureManager structureManager, ChunkAccess chunk) {
         BlockState stone = ModBlocks.DesecratedStone.get().defaultBlockState();
         BlockState deep = ModBlocks.VoidStone.get().defaultBlockState();
@@ -207,10 +207,5 @@ public class SpiritChunkGenerator extends ChunkGenerator {
                                      StructureManager structureManager) {
         // biome decoration (our ruin features) is applied by the vanilla feature pipeline
         super.applyBiomeDecoration(level, chunk, structureManager);
-    }
-
-    @Override
-    public Holder<Biome> getBiomeSourceHolder() {
-        return null;
     }
 }

@@ -1,6 +1,7 @@
 package com.pathways.beyond.ritual;
 
 import com.pathways.beyond.item.OccultItems;
+import com.pathways.beyond.item.SealedArtifactStack;
 import com.pathways.beyond.network.ModNetwork;
 import com.pathways.beyond.network.OccultMessages;
 import com.pathways.beyond.pathway.PlayerPathway;
@@ -453,7 +454,7 @@ public final class RitualManager {
                     case "unseal_the_bell" -> new ItemStack(ModItems.WhisperingBell.get());
                     default -> new ItemStack(ModItems.BrassKey.get());
                 };
-                OccultItems.SealedArtifactStack.setSealed(artifact, false);
+                SealedArtifactStack.setSealed(artifact, false);
                 if (!celebrant.getInventory().add(artifact)) {
                     celebrant.drop(artifact, false);
                 }

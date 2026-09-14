@@ -67,7 +67,7 @@ public final class StructurePlacer {
         public static final String NAME = "pathwaysofthebeyond_structures";
         private final Set<Long> placed = new HashSet<>();
 
-        public static PlacedData load(CompoundTag tag) {
+        public static PlacedData load(CompoundTag tag, net.minecraft.core.HolderLookup.Provider registries) {
             PlacedData data = new PlacedData();
             for (long key : tag.getLongArray("placed")) {
                 data.placed.add(key);
@@ -76,7 +76,7 @@ public final class StructurePlacer {
         }
 
         @Override
-        public CompoundTag save(CompoundTag tag) {
+        public CompoundTag save(CompoundTag tag, net.minecraft.core.HolderLookup.Provider registries) {
             long[] array = new long[placed.size()];
             int i = 0;
             for (long key : placed) {
@@ -97,7 +97,7 @@ public final class StructurePlacer {
 
         public static PlacedData get(ServerLevel level) {
             DimensionDataStorage storage = level.getDataStorage();
-            return storage.computeIfAbsent(new Factory<>(PlacedData::new, PlacedData::load), NAME);
+            return storage.computeIfAbsent(new Factory<>(PlacedData::new, PlacedData::load, null), NAME);
         }
     }
 

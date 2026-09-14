@@ -408,7 +408,7 @@ def gen_items():
         cls = ITEM_CLASSES[aid]
         out.append(f'    /** {name} - {desc} */')
         out.append(f'    public static final DeferredItem<Item> {const} = ITEMS.register("{aid}",')
-        out.append(f'            () -> new {cls}(new Item.Properties().stacksTo(1)'
+        out.append(f'            () -> new OccultItems.{cls}(new Item.Properties().stacksTo(1)'
                    f'.rarity(Rarity.{rarity_name(rarity)})));')
     out.append("")
     out.append("    // ---- occult tools ----")
@@ -417,7 +417,7 @@ def gen_items():
         cls = ITEM_CLASSES[uid]
         out.append(f'    /** {name} - {desc} */')
         out.append(f'    public static final DeferredItem<Item> {const} = ITEMS.register("{uid}",')
-        out.append(f'            () -> new {cls}(new Item.Properties().stacksTo(1)));')
+        out.append(f'            () -> new OccultItems.{cls}(new Item.Properties().stacksTo(1)));')
     out.append("")
     out.append("    // ---- drops ----")
     out.append('    public static final DeferredItem<Item> CORRUPTED_HEART_DROP = ITEMS.register("corrupted_heart",')
@@ -473,7 +473,7 @@ def gen_entities():
         }.get(cls, f"OccultEntities.{cls}::new")
         out.append(f'    /** {eid} */')
         holder = "OccultEntities." + cls if cls not in ("ChoirmasterEntity", "UnblinkingEntity") else cls
-        out.append(f'    public static final DeferredHolder<EntityType<?>, EntityType<{cls}>> {const} =')
+        out.append(f'    public static final DeferredHolder<EntityType<?>, EntityType<{holder}>> {const} =')
         out.append(f'            ENTITIES.register("{eid}", () -> EntityType.Builder.of({factory}, MobCategory.{category})')
         out.append(f'                    .sized({width}f, {height}f)')
         out.append(f'                    .clientTrackingRange(10)')
@@ -485,6 +485,69 @@ def gen_entities():
             "}",
             ""]
     w("registry/ModEntities.java", "\n".join(out))
+
+
+
+TAB_ARTIFACT_TOOLS = ("thread_shears", "soul_thread_spool", "occult_compass", "ward_charm", "spirit_tonic")
+TAB_BEYOND_KEYS = ("void", "beyond", "starless", "memory", "corrupted", "abyss")
+
+
+def gen_tab_contents():
+    """Tab contents are emitted as id lists: a pack that disables an entry simply skips it."""
+    potions = [p[0] for p in POTIONS]
+    ingredients = [i[0] for i in INGREDIENTS]
+    artifacts = [a[0] for a in ARTIFACTS]
+    utility = [u[0] for u in UTILITY_ITEMS]
+    blocks = [b[0] for b in BLOCKS]
+
+    beyond = [i for i in blocks + ingredients + utility
+              if any(key in i for key in TAB_BEYOND_KEYS)]
+    artifacts_tab = list(artifacts) + [t for t in TAB_ARTIFACT_TOOLS if t in utility]
+    ritual = ([b for b in blocks if b not in beyond]
+              + [i for i in ingredients if i not in beyond]
+              + [u for u in utility if u not in artifacts_tab
+                 and u not in beyond and u != "pathway_codex"])
+    paths = list(potions) + ["pathway_codex"]
+
+    out = [HEADER, f"package {PACKAGE}.registry;", "",
+           "import java.util.List;",
+           "import java.util.Map;",
+           "",
+           "import net.minecraft.core.registries.BuiltInRegistries;",
+           "import net.minecraft.resources.ResourceLocation;",
+           "import net.minecraft.world.item.CreativeModeTab;",
+           "import net.minecraft.world.item.Item;",
+           "import net.minecraft.world.item.Items;",
+           "",
+           f'import static {PACKAGE}.PathwaysMod.MOD_ID;',
+           "",
+           "/** Curated creative-tab contents: each tab reads as a set, not a pile. */",
+           "public final class TabContents {",
+           "    private TabContents() {}",
+           "",
+           "    private static final Map<String, List<String>> BY_TAB = Map.of("]
+    listings = [("pathways", paths), ("pathway_ritual", ritual),
+                ("pathway_artifacts", artifacts_tab), ("pathway_beyond", beyond)]
+    for index, (tab, ids) in enumerate(listings):
+        out.append(f'            "{tab}", List.of(')
+        for j, iid in enumerate(ids):
+            comma = "," if j < len(ids) - 1 else ""
+            out.append(f'                    "{iid}"{comma}')
+        out.append(f'            ){"," if index < len(listings) - 1 else ""}')
+    out += ["    );",
+            "",
+            "    /** Adds one tab's entries; ids that are missing from the registry are skipped. */",
+            "    public static void fill(String tab, CreativeModeTab.Output output) {",
+            "        for (String id : BY_TAB.getOrDefault(tab, List.of())) {",
+            "            Item item = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(MOD_ID, id));",
+            "            if (item != Items.AIR) {",
+            "                output.accept(item);",
+            "            }",
+            "        }",
+            "    }",
+            "}",
+            ""]
+    w("registry/TabContents.java", "\n".join(out))
 
 
 def gen_tabs():
@@ -758,6 +821,7 @@ def main():
     gen_items()
     gen_entities()
     gen_tabs()
+    gen_tab_contents()
     lang = gen_lang()
     gen_sounds_json()
     print("[java] done")

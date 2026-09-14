@@ -332,8 +332,10 @@ public final class OccultBlocks {
                     }
                     stack.remove(com.pathways.beyond.registry.ModComponents.BLOOD_CHARGES.get());
                     level.playSound(null, pos, ModSounds.DaggerCut.get(), SoundSource.BLOCKS, 0.7f, 1.2f);
-                    level.sendParticles(ModParticles.BloodDrop.get(), pos.getX() + 0.5, pos.getY() + 0.8,
-                            pos.getZ() + 0.5, 12, 0.3, 0.1, 0.3, 0.02);
+                    if (level instanceof ServerLevel serverLevel) {
+                        serverLevel.sendParticles(ModParticles.BloodDrop.get(), pos.getX() + 0.5, pos.getY() + 0.8,
+                                pos.getZ() + 0.5, 12, 0.3, 0.1, 0.3, 0.02);
+                    }
                 }
                 return ItemInteractionResult.SUCCESS;
             }
@@ -491,6 +493,11 @@ public final class OccultBlocks {
         }
 
         @Override
+        protected com.mojang.serialization.MapCodec<? extends net.minecraft.world.level.block.BushBlock> codec() {
+            return simpleCodec(SpiritFlowerBlock::new);
+        }
+
+        @Override
         protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
             return state.is(Blocks.GRASS_BLOCK) || state.is(Blocks.DIRT) || state.is(Blocks.COARSE_DIRT)
                     || state.is(Blocks.PODZOL) || state.is(Blocks.MYCELIUM) || state.is(Blocks.SOUL_SAND)
@@ -501,6 +508,11 @@ public final class OccultBlocks {
     public static class MoonlitFungusBlock extends net.minecraft.world.level.block.BushBlock {
         public MoonlitFungusBlock(Properties properties) {
             super(properties);
+        }
+
+        @Override
+        protected com.mojang.serialization.MapCodec<? extends net.minecraft.world.level.block.BushBlock> codec() {
+            return simpleCodec(MoonlitFungusBlock::new);
         }
 
         @Override

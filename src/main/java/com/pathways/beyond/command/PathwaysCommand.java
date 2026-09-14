@@ -82,7 +82,7 @@ public final class PathwaysCommand {
                                     ModNetwork.sendOccultSync(player);
                                     ctx.getSource().sendSuccess(() -> Component.literal(
                                             "Corruption = " + value + " ("
-                                                    + SanitySystem.stage(value).id() + ")"), false);
+                                                    + SanitySystem.stage(value).id + ")"), false);
                                     return 1;
                                 })))
                 .then(Commands.literal("sequence")
@@ -170,7 +170,7 @@ public final class PathwaysCommand {
                                             if (candidate == WorldEventManager.Event.THE_NOTICING) {
                                                 WorldEventManager.beginTheNoticing(player.serverLevel(), player);
                                             } else {
-                                                WorldEventManager.start(player.serverLevel(), event);
+                                                WorldEventManager.start(player.serverLevel(), candidate);
                                             }
                                             ctx.getSource().sendSuccess(() -> Component.literal(
                                                     "Started event: " + id), true);
@@ -261,9 +261,9 @@ public final class PathwaysCommand {
                 + "  sequence: " + pathway.sequence()
                 + "  digestion: " + String.format("%.1f", pathway.digestion()) + "%"), false);
         source.sendSuccess(() -> Component.literal("sanity: " + String.format("%.1f", state.sanity())
-                + " (" + SanitySystem.tier(state.sanity()).id() + ")"
+                + " (" + SanitySystem.tier(state.sanity()).id + ")"
                 + "  corruption: " + String.format("%.1f", state.corruption())
-                + " (" + SanitySystem.stage(state.corruption()).id() + ")"), false);
+                + " (" + SanitySystem.stage(state.corruption()).id + ")"), false);
         source.sendSuccess(() -> Component.literal("rituals known: " + pathway.knownRituals().size()
                 + "  threads bound: " + com.pathways.beyond.soul.SoulThreadManager.boundCount(player)
                 + "  spirit form: " + state.spiritForm()

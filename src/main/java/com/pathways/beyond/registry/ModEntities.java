@@ -21,63 +21,63 @@ public final class ModEntities {
             DeferredRegister.create(Registries.ENTITY_TYPE, MOD_ID);
 
     /** watcher */
-    public static final DeferredHolder<EntityType<?>, EntityType<WatcherEntity>> Watcher =
+    public static final DeferredHolder<EntityType<?>, EntityType<OccultEntities.WatcherEntity>> Watcher =
             ENTITIES.register("watcher", () -> EntityType.Builder.of(OccultEntities.WatcherEntity::new, MobCategory.MONSTER)
                     .sized(0.6f, 2.6f)
                     .clientTrackingRange(10)
                     .build("watcher"));
 
     /** hollow */
-    public static final DeferredHolder<EntityType<?>, EntityType<HollowEntity>> Hollow =
+    public static final DeferredHolder<EntityType<?>, EntityType<OccultEntities.HollowEntity>> Hollow =
             ENTITIES.register("hollow", () -> EntityType.Builder.of(OccultEntities.HollowEntity::new, MobCategory.MONSTER)
                     .sized(0.6f, 2.0f)
                     .clientTrackingRange(10)
                     .build("hollow"));
 
     /** whispering_husk */
-    public static final DeferredHolder<EntityType<?>, EntityType<WhisperingHuskEntity>> WhisperingHusk =
+    public static final DeferredHolder<EntityType<?>, EntityType<OccultEntities.WhisperingHuskEntity>> WhisperingHusk =
             ENTITIES.register("whispering_husk", () -> EntityType.Builder.of(OccultEntities.WhisperingHuskEntity::new, MobCategory.MONSTER)
                     .sized(0.6f, 1.95f)
                     .clientTrackingRange(10)
                     .build("whispering_husk"));
 
     /** veil_tenant */
-    public static final DeferredHolder<EntityType<?>, EntityType<VeilTenantEntity>> VeilTenant =
+    public static final DeferredHolder<EntityType<?>, EntityType<OccultEntities.VeilTenantEntity>> VeilTenant =
             ENTITIES.register("veil_tenant", () -> EntityType.Builder.of(OccultEntities.VeilTenantEntity::new, MobCategory.MONSTER)
                     .sized(0.7f, 2.1f)
                     .clientTrackingRange(10)
                     .build("veil_tenant"));
 
     /** spirit_wisp */
-    public static final DeferredHolder<EntityType<?>, EntityType<SpiritWispEntity>> SpiritWisp =
+    public static final DeferredHolder<EntityType<?>, EntityType<OccultEntities.SpiritWispEntity>> SpiritWisp =
             ENTITIES.register("spirit_wisp", () -> EntityType.Builder.of(OccultEntities.SpiritWispEntity::new, MobCategory.AMBIENT)
                     .sized(0.4f, 0.4f)
                     .clientTrackingRange(10)
                     .build("spirit_wisp"));
 
     /** player_body_shell */
-    public static final DeferredHolder<EntityType<?>, EntityType<PlayerBodyShellEntity>> PlayerBodyShell =
+    public static final DeferredHolder<EntityType<?>, EntityType<OccultEntities.PlayerBodyShellEntity>> PlayerBodyShell =
             ENTITIES.register("player_body_shell", () -> EntityType.Builder.of(OccultEntities.PlayerBodyShellEntity::new, MobCategory.CREATURE)
                     .sized(0.6f, 1.8f)
                     .clientTrackingRange(10)
                     .build("player_body_shell"));
 
     /** marionette */
-    public static final DeferredHolder<EntityType<?>, EntityType<MarionetteEntity>> Marionette =
+    public static final DeferredHolder<EntityType<?>, EntityType<OccultEntities.MarionetteEntity>> Marionette =
             ENTITIES.register("marionette", () -> EntityType.Builder.of(OccultEntities.MarionetteEntity::new, MobCategory.CREATURE)
                     .sized(0.6f, 1.8f)
                     .clientTrackingRange(10)
                     .build("marionette"));
 
     /** bizarro_clone */
-    public static final DeferredHolder<EntityType<?>, EntityType<BizarroCloneEntity>> BizarroClone =
+    public static final DeferredHolder<EntityType<?>, EntityType<OccultEntities.BizarroCloneEntity>> BizarroClone =
             ENTITIES.register("bizarro_clone", () -> EntityType.Builder.of(OccultEntities.BizarroCloneEntity::new, MobCategory.CREATURE)
                     .sized(0.6f, 1.8f)
                     .clientTrackingRange(10)
                     .build("bizarro_clone"));
 
     /** historical_echo */
-    public static final DeferredHolder<EntityType<?>, EntityType<HistoricalEchoEntity>> HistoricalEcho =
+    public static final DeferredHolder<EntityType<?>, EntityType<OccultEntities.HistoricalEchoEntity>> HistoricalEcho =
             ENTITIES.register("historical_echo", () -> EntityType.Builder.of(OccultEntities.HistoricalEchoEntity::new, MobCategory.AMBIENT)
                     .sized(0.6f, 1.8f)
                     .clientTrackingRange(10)

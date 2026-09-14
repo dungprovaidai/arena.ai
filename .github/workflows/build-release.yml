@@ -70,6 +70,10 @@ jobs:
             echo '```text'
             grep -E "\.java:[0-9]+: error|error: cannot find symbol|error: " build.log 2>/dev/null | head -n 120 || echo 'none matched'
             echo '```'
+            echo '#### Compile error detail (with symbols)'
+            echo '```text'
+            grep -A3 "error:" build.log 2>/dev/null | head -c 50000 || true
+            echo '```'
             echo '#### Gradle failure summary'
             echo '```text'
             sed -n '/FAILURE: Build failed/,/^\* Try:/p' build.log 2>/dev/null | head -n 60 || true

@@ -84,8 +84,7 @@ public final class ClientEvents {
     /** Fog density: volumetric-looking in the Spirit World, thicker at Corruption and Dread. */
     private static void onRenderFog(ViewportEvent.RenderFog event) {
         Minecraft minecraft = Minecraft.getInstance();
-        if (minecraft.level == null
-                || event.getType() != net.minecraft.client.renderer.FogRenderer.FogType.FOG_TERRAIN) {
+        if (minecraft.level == null) {
             return;
         }
         float packetFog = ClientPacketHandler.fogDensity();
@@ -99,7 +98,6 @@ public final class ClientEvents {
         float near = Math.min(event.getNearPlaneDistance(), far * 0.35f);
         event.setNearPlaneDistance(near);
         event.setFarPlaneDistance(far);
-        event.setFogShape(net.minecraft.client.renderer.FogRenderer.FogShape.CYLINDER);
         event.setCanceled(true);
         // and the air itself carries motes, which is what sells "this is not a place"
         LocalPlayer player = minecraft.player;
