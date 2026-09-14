@@ -58,6 +58,30 @@ jobs:
           grep -E "error:|\.java:[0-9]+: error" build.log | head -n 80 || true
           echo '::endgroup::'
 
+      - name: Publish failure diagnostics as a commit comment
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          {
+            echo "### Build failed for ${GITHUB_SHA:0:7}"
+            echo
+            echo '#### Compile errors'
+            echo '```text'
+            grep -E "\.java:[0-9]+: error|error: cannot find symbol|error: " build.log 2>/dev/null | head -n 120 || echo 'none matched'
+            echo '```'
+            echo '#### Gradle failure summary'
+            echo '```text'
+            sed -n '/FAILURE: Build failed/,/^\* Try:/p' build.log 2>/dev/null | head -n 60 || true
+            echo '```'
+            echo '#### Tail of build log'
+            echo '```text'
+            tail -c 12000 build.log 2>/dev/null || echo 'no build.log'
+            echo '```'
+          } > diag.md
+          gh api -X POST "repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/comments" \
+            -F body=@diag.md >/dev/null && echo "diagnostics posted"
+
       - name: Resolve artefact name
         id: jar
         run: |
